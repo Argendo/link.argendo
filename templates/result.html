@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener Result</title>
+</head>
+<body>
+    <h1>URL Shortener Result</h1>
+    
+    <p>Short URL: <a href="{{ short_url }}">{{ short_url }}</a></p>
+    <p>QR Code:</p>
+    <img src="{{ url_for('static', filename='qrcodes/' + qr_code_filename) }}" alt="QR Code">
+</body>
+</html>
