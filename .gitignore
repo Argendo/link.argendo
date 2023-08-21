@@ -2,3 +2,4 @@ urls.db
 __pycache__/
 static/qrcodes/*
 !static/qrcodes/.gitkeep
+private/
