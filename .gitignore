@@ -3,3 +3,4 @@ __pycache__/
 static/qrcodes/*
 !static/qrcodes/.gitkeep
 private/
+wsgi.py

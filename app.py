@@ -8,7 +8,7 @@ app = Flask(__name__)
 qrcodes_dir = os.path.join(app.static_folder, 'qrcodes')
 os.makedirs(qrcodes_dir, exist_ok=True)
 
-conn = sqlite3.connect('urls.db')
+conn = sqlite3.connect('/home/argendo/code/link.argendo/source/urls.db')
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS urls
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,7 +33,7 @@ def generate_qr_code(short_url):
     return img
 
 def save_qr_code(short_url):
-    qr_code = generate_qr_code(short_url)
+    qr_code = generate_qr_code("http://link.argendo.space/"+short_url)
     qr_code_filename = f'{short_url}.png'
     qr_code_path = os.path.join(qrcodes_dir, qr_code_filename)
     qr_code.save(qr_code_path)
@@ -45,7 +45,7 @@ def home():
         original_url = request.form['original_url']
         if original_url:
             short_url = create_short_url()
-            conn = sqlite3.connect('urls.db')
+            conn = sqlite3.connect('/home/argendo/code/link.argendo/source/urls.db')
             c = conn.cursor()
 
             short_url = create_short_url()
@@ -60,7 +60,7 @@ def home():
 
 @app.route('/<short_url>', methods=['GET'])
 def redirect_to_original_url(short_url):
-    conn = sqlite3.connect('urls.db')
+    conn = sqlite3.connect('/home/argendo/code/link.argendo/source/urls.db')
     c = conn.cursor()
 
     c.execute("SELECT original_url FROM urls WHERE short_url=?", (short_url,))
